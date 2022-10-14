@@ -1,0 +1,102 @@
+:root {
+    --primary-color: #1d5888;
+    --secondary-color: #ff993b;
+    --dark-color: #292929;
+    --white-color: #f3f3f3;
+}
+
+body {
+    color: var(--dark-color);
+}
+
+nav {
+    background-color: var(--dark-color);
+}
+
+main>.container {
+    padding: 60px 15px 0;
+    margin-bottom: 5rem;
+}
+
+
+h1,h2,h3,h4,h5,h6 {
+    color: var(--primary-color);
+}
+
+.bsicon-color {
+    color: indigo;
+}
+
+.jsicon-color {
+    color: #F0DB4F;
+}
+
+
+.html5icon-color {
+    color:  #e34c26
+}
+
+.css3icon-color {
+    color: #264de4
+}
+
+.checklist >li i {
+    color: var(--secondary-color);
+}
+
+
+code[class*="language-"], pre[class*="language-"] {
+    white-space: pre-wrap;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+/* === Footer === */
+footer {
+    background-color: var(--dark-color);
+}
+
+footer.footer-text {
+    font-size: 16px;
+}
+
+footer .social>a {
+    color: var(--white-color);
+    opacity: 0.75;
+
+}
+
+footer .social>a:hover{
+    opacity: 0.90;
+    color: var(--secondary-color);
+}
+
+
+
+.sticky-footer {
+    position: sticky;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+@media only screen and (max-width: 393px) {
+    .footer-text {
+        font-size: 10px;
+    }
+
+    .iconsize >div i {
+        font-size: 3rem;
+    }
+}
+
+@media only screen and (max-width: 280px) {
+    .footer-text {
+        font-size: 9px;
+    }
+
+    .iconsize >div i {
+        font-size: 2rem;
+    }
+    
+}
