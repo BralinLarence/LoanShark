@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project</title>
+    <title>Loan Shark: A Coding Challenge</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,19 +12,25 @@
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <!-- CSS Stylesheet -->
     <link rel="stylesheet" href="/css/main.css">
+    
 
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/5db21ba9c6.js" crossorigin="anonymous"></script>
-
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/img/favicon.ico">
 
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Lexend+Deca&display=swap" rel="stylesheet">
+  
 </head>
 
 <body class="d-flex flex-column h-100">
     <!-- ==== Nav Section ==== -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+    <nav class="navbar navbar-expand-md fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="/img/BralinLarence-Brand-Header-Logo-1.svg" class="d-inline-block align-text-top" height="24" width="100">APP NAME</a>
+            <a class="navbar-brand nav-brand-font" href="#">LoanShark</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -32,41 +38,136 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link nav-link-font" aria-current="page" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="app.html">App</a>
+                        <a class="nav-link active nav-link-font" href="app.html">App</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="code.html">Code</a>
+                        <a class="nav-link nav-link-font" href="code.html">Code</a>
+                    </li>                    
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-font" target="_blank" href="#">Git Repo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="#">Git Repo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="#">About</a>
+                        <a class="nav-link nav-link-font" target="_blank" href="#">About</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
     <!-- ==== Main Section ==== -->
-    <main class="flex-shrink-0">
+    <main class="flex-shrink-0 mt-5">
         <div class="container">
-
+            <div class="row row-cols-1 gx-4">
+                <!-- Left Column -->
+                <div class="col col-md-5">
+                    <h1>Loan Calculator</h1>
+                    <div class="container form-container bg-rounded p-3">
+                        <form class="row row-cols-1" id="calculator" action="">
+                            <div class="col">
+                                <label for="loanAmount" class="form-content-font" >Loan Amount</label>
+                                <input id="loanAmount" class="form-control" placeholder="Loan Amount" aria-label="Loan Amount" type="number" value="25000" required>
+                            </div>
+                            <div class="col">
+                                <label for="terms" class="form-content-font" >Terms (Months)</label>
+                                <input id="terms" class="form-control" placeholder="terms" aria-label="Interest Rate" type="number" value="60" required>
+                            </div>
+                            <div class="col">
+                                <label for="interestRate" class="form-content-font" >Interest Rate %</label>
+                                <input id="interestRate" class="form-control" placeholder="Interest Rate" aria-label="Interest Rate" type="number" value="5" required>
+                            </div>
+                            <div class="col-12 mt-3 d-flex justify-content-end">
+                                <button type="button" id="btnSubmit" class="btn-primary-blue-solid mx-2 btn-sm" >Calculate</button>
+                                <button type="button" id="btnReset" class="btn-primary-blue-solid btn-sm">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                  
+                </div>
+                <!-- Right Column  -->
+                <!-- Optional: put the shark image here -->
+                <div class="col col-md-7">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 text-center mt-5">
+                                <h2>Monthly Payments</h2>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <h1 id="monthlyPayment" class="text-center">$471.78</h1>
+                            </div>
+                            <!-- Total Amounts -->
+                            <div class="col mt-4">
+                                <div class="row row-cols-1 ">
+                                    <div class="col bg-rounded mb-2">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h6>Total Principle:</h6>
+                                            </div>
+                                            <div class="col d-flex justify-content-end">
+                                                <h6 id="totalPrincipalAmt">$25,000.00</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col bg-rounded mb-2">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h6>Total Interest:</h6>
+                                            </div>
+                                            <div class="col d-flex justify-content-end">
+                                                <h6 id="totalInterestAmt">$3,306.85</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col bg-rounded mb-2">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h6>Total Cost:</h6>
+                                            </div>
+                                            <div class="col d-flex justify-content-end">
+                                                <h6 id="totalCostAmt">$28,306.85</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <!-- Table -->
+                    <div class="table-responsive mt-5">
+                        <table id="loanPaymentsTable" class="table table-striped table-hover table-sm invisible d-none">
+                            <thead>
+                                <tr class="top-row">
+                                    <th scpope="col">Month</th>
+                                    <th scpope="col">Payment</th>
+                                    <th scpope="col">Principal</th>
+                                    <th scpope="col">Interest</th>
+                                    <th scpope="col">Total Interest</th>
+                                    <th scpope="col">Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody id="loanPaymentTableBody">
+                                <!-- Loan payment data go here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
-    <!-- ==== Footer Section ==== -->
+     <!-- ==== Footer Section ==== -->
     <footer class="footer mt-auto py-3">
         <div class="container-fluid">
             <div class="row row-cols-1 row-cols-lg-3 gy-2">
                 <div class="col order-last order-lg-first d-flex align-items-center justify-content-center text-light ">
-                    <div class="footer-text"><span class="text-mute">&copy;2022</span> Bralin Larence </div>
+                    <div class="footer-text footer-text-color"><span class="text-mute">&copy;2022</span> Bralin Larence </div>
                 </div>
                 <div class="col d-flex align-items-center justify-content-sm-center justify-content-lg-center mb-2">
-                    <img src="/img/BralinLarence-Logo-1.svg" alt="Bralin Larence Logo" class="img-fluid"></img>
+                    <img src="/img/BralinLarence-Logo-1.svg" alt="Bralin Larence Logo" class="img-fluid filter-primary-blue"></img>
                 </div>
-                <div class="col  px-5 d-flex align-items-center justify-content-center justify-content-lg-end">
+                <div class="col  px-5 d-flex align-items-center justify-content-center justify-content-lg-center">
                     <div class="row">
                         <div class="col social"><a href="#" target="_blank"><i class="fab fa-github fa-2x"></i></a></div>
                         <div class="col social"><a href="#" target="_blank"><i class="fab fa-linkedin fa-2x"></i></a></div>
@@ -77,11 +178,27 @@
             </div>
         </div>
     </footer>
+    <template id="loanTemplateRow">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </template>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
         </script>
     <!-- Main JS -->
     <script src="/js/main.js"></script>
+    <script>
+        document.getElementById("btnSubmit").addEventListener("click", getValue);
+    </script>
+    <script>
+        document.getElementById("btnReset").addEventListener("click", clearForm);
+    </script>
 </body>
 </html>

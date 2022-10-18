@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project</title>
+    <title>Loan Shark: A Coding Challenge</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,8 +10,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    
-        <!-- CSS Stylesheet -->
+    <!-- CSS Stylesheet -->
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/prism.css">
 
@@ -20,13 +19,18 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/img/favicon.ico">
 
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Lexend+Deca&display=swap" rel="stylesheet">
+  
 </head>
 
 <body class="d-flex flex-column h-100">
     <!-- ==== Nav Section ==== -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+    <nav class="navbar navbar-expand-md fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="/img/BralinLarence-Brand-Header-Logo-1.svg" class="d-inline-block align-text-top" height="24" width="100">APP NAME</a>
+            <a class="navbar-brand nav-brand-font" href="#">LoanShark</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -34,19 +38,19 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link "  href="index.html">Home</a>
+                        <a class="nav-link nav-link-font " aria-current="page" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="app.html">App</a>
+                        <a class="nav-link nav-link-font" href="app.html">App</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="code.html">Code</a>
+                        <a class="nav-link active nav-link-font" href="code.html">Code</a>
+                    </li>                    
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-font" target="_blank" href="#">Git Repo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="#">Git Repo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="#">About</a>
+                        <a class="nav-link nav-link-font" target="_blank" href="#">About</a>
                     </li>
                 </ul>
             </div>
@@ -55,37 +59,180 @@
     <!-- ==== Main Section ==== -->
     <main class="flex-shrink-0">
         <div class="container py-4 px-5 mt-5">
-            <h2 class="border-1 border-bottom border-dark">The Code for APP NAME</h2>
+            <h2 class="border-1 border-bottom border-primary main-content-font">The Code for Loan Shark</h2>
             <div class="row row-cols-1 row-cols-md-2">
                 <div class="col-lg-8">
                     <pre class="line-numbers"><code class="language-javascript">
-                            // Call Hello World
-                            function HelloWorld() {
-                            alert("Hello World");
+                            let $ = function(id) {
+                                return document.getElementById(id);
                             }
-                    </code>
+
+
+                            const usd = new Intl.NumberFormat("en-US", {
+                                style: "currency",
+                                currency: "USD",
+                                maximumFractionDigits: 2,
+                            });
+
+
+                            //Get values
+                            function getValue() {
+                                
+                                //Show Table
+                                $("loanPaymentsTable").classList.remove("invisible", "d-none");
+                                
+                                //Get user input 
+                                let loanAmount = parseFloat($("loanAmount").value);
+                                let terms = parseFloat($("terms").value);
+                                let interestRate = parseFloat($("interestRate").value);
+
+                                //Check if values are numbers
+                                if(Number.isInteger(loanAmount) && Number.isInteger(terms) && Number.isInteger(interestRate))
+                                {
+                                    //Call loan calculator function -- return the array
+                                    let loanData = calculateLoan(loanAmount, terms, interestRate);
+                                    //Call display function
+                                    displayLoanData(loanData, loanAmount);
+
+                                }
+                                else
+                                {
+                                    alert("Only enter numbers!");
+                                }
+
+
+                            }
+
+                            //Calaculate loan payments
+                            function calculateLoan(loanAmount, terms, interestRate) {
+                            
+                                //Loan results object and loan data array
+                                let loanData = [];
+
+                                //Variables
+                                let balance = loanAmount;
+                                let principalPayment = 0;
+                                let interestPayment = 0;
+                                let totalInterest = 0;
+                            
+                                //Monthly calculations
+                                let monthlyPayment = parseFloat((loanAmount * (interestRate/1200)) / (1 - (1 + (interestRate / 1200)) ** (-Math.abs(terms))));
+
+
+                                for(let i = 0; i < terms; i++) {
+                                
+                                    // Calculate loan data 
+                                    interestPayment = parseFloat(balance * (interestRate / 1200));
+                                    principalPayment = parseFloat(monthlyPayment - interestPayment);
+                                    totalInterest = parseFloat(totalInterest + interestPayment);
+                                    totalInterest = parseFloat(totalInterest);
+                                    balance -= principalPayment;
+                                    balance = Math.abs(parseFloat(balance));
+                                    //monthlyPayment = monthlyPayment;
+
+                                    if(i == terms - 1) {
+                                        if(balance > 0){
+                                            monthlyPayment = parseFloat(monthlyPayment + balance);
+                                            // monthlyPayment = monthlyPayment.toFixed(2);
+                                            balance = 0;
+                                        }
+                                    }
+
+                                    //Assign the values to the variables to the loan results object
+
+                                    let loanResults = {
+                                        month: i + 1,
+                                        monthlyPayment: parseFloat(monthlyPayment.toFixed(2)),
+                                        principalPayment: parseFloat(principalPayment.toFixed(2)),
+                                        interestPayment: parseFloat(interestPayment.toFixed(2)),
+                                        totalInterest: parseFloat(totalInterest.toFixed(2)),
+                                        balance: parseFloat(balance.toFixed(2))
+                                    }
+
+                                    //push the object into the loan data array. 
+                                    loanData.push(loanResults);
+                                }
+
+                                return loanData; 
+                            }
+
+
+                            //Display data
+                            function displayLoanData(loanData, loanAmount) {
+                            
+                                let tableBody = $("loanPaymentTableBody");
+                                let templateRow = $("loanTemplateRow");
+
+                                loanData.forEach((i) => {
+                                    let tableRow = document.importNode(templateRow.content, true);
+                                    let rowCols = tableRow.querySelectorAll("td");
+                                    
+                                    rowCols[0].textContent = i.month;
+                                    rowCols[1].textContent = usd.format(i.monthlyPayment);
+                                    rowCols[2].textContent = usd.format(i.principalPayment);
+                                    rowCols[3].textContent = usd.format(i.interestPayment);
+                                    rowCols[4].textContent = usd.format(i.totalInterest);
+                                    rowCols[5].textContent = usd.format(i.balance);
+
+                                    tableBody.appendChild(tableRow);
+                                })
+
+                                //Total Interest
+                                totalInterest = loanData[loanData.length -1].totalInterest;
+                                
+
+                                // Total Cost
+                                let totalCostAmt = $("totalCostAmt");
+                                totalCostAmt = loanAmount + parseFloat(totalInterest);
+                                $("totalCostAmt").innerHTML = usd.format(totalCostAmt);
+                                $("totalInterestAmt").innerHTML = usd.format(totalInterest);
+                                
+                                //Total Principle
+                                $("totalPrincipalAmt").innerHTML = usd.format(loanAmount);
+
+                                // Monthly Payment
+                                monthlyPayment = parseFloat(loanData[0].monthlyPayment);
+                                $("monthlyPayment").innerHTML = usd.format(monthlyPayment);
+                            }
+
+
+                            function clearForm() {
+                                $("loanPaymentsTable").classList.add("invisible", "d-none");
+
+                                $("loanAmount").value = 25000.00;
+                                $("terms").value = 60;
+                                $("interestRate").value = 5;
+
+                                $("totalCostAmt").innerHTML = usd.format(28306.85);
+                                $("totalInterestAmt").innerHTML = usd.format(3306.85);
+                                $("totalPrincipalAmt").innerHTML = usd.format(25000.00);
+                            }
+                        </code>
                     </pre>
                 </div>
                 <div class="col-lg-4">
-                    <p>The Code is structured in one function.</p>
-                    <h5>Hello World</h5>
-                    <p>Hello World is a function that diplays an alert with a message of Hello World</p>
+                    <h5 class="main-content-font">Introduction</h5>
+                    <p>
+                        This code uses the <strong>Model View Controller (MVC)</strong> architectural pattern. 
+                        There are three separate components in this pattern such as Model, View, Controllers as shown in the name of the
+                        design pattern . Each function has its own responsibilities which makes it easier to maintain and update the 
+                        code base through it's life cycle. 
                 </div>
 
             </div>
         </div>
     </main>
-    <!-- ==== Footer Section ==== -->
+     <!-- ==== Footer Section ==== -->
     <footer class="footer mt-auto py-3">
         <div class="container-fluid">
             <div class="row row-cols-1 row-cols-lg-3 gy-2">
                 <div class="col order-last order-lg-first d-flex align-items-center justify-content-center text-light ">
-                    <div class="footer-text"><span class="text-mute">&copy;2022</span> Bralin Larence </div>
+                    <div class="footer-text footer-text-color"><span class="text-mute">&copy;2022</span> Bralin Larence </div>
                 </div>
                 <div class="col d-flex align-items-center justify-content-sm-center justify-content-lg-center mb-2">
-                    <img src="/img/BralinLarence-Logo-1.svg" alt="Bralin Larence Logo" class="img-fluid"></img>
+                    <img src="/img/BralinLarence-Logo-1.svg" alt="Bralin Larence Logo" class="img-fluid filter-primary-blue"></img>
                 </div>
-                <div class="col  px-5 d-flex align-items-center justify-content-center justify-content-lg-end">
+                <div class="col  px-5 d-flex align-items-center justify-content-center justify-content-lg-center">
                     <div class="row">
                         <div class="col social"><a href="#" target="_blank"><i class="fab fa-github fa-2x"></i></a></div>
                         <div class="col social"><a href="#" target="_blank"><i class="fab fa-linkedin fa-2x"></i></a></div>
